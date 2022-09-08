@@ -2,8 +2,8 @@ const http = require('http');
 const fs = require('fs')
 const url = require('url');
 const querystring = require('querystring');
-const figlet = require('figlet'); 
-
+const figlet = require('figlet');
+const PORT = process.env.PORT || 8000;
 
 const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
@@ -56,4 +56,4 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(8000);
+server.listen(PORT);
