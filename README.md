@@ -4,7 +4,13 @@
 A web application that performs a coin flip. The randomization happens on the server-side and not the browser/client-side. 
 I built this project to gain more practice with Node.JS & Heroku deployment.
 
-The project is deployed here: https://obscure-cove-43173.herokuapp.com/
+Edit: (new deployment)
+
+The project is deployed here: https://mysterious-toad-beret.cyclic.app/
+
+(previous deployment, heroku no longer free)
+
+~~The project is deployed here: https://obscure-cove-43173.herokuapp.com/~~
 
 ## Demo
 ![demo](coindemo.gif)
