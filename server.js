@@ -18,19 +18,11 @@ const server = http.createServer((req, res) => {
   }
   else if (page == '/api') {
         res.writeHead(200, {'Content-Type': 'application/json'});
-        let flipResult = Math.ceil(Math.random() * 2);
-        if (flipResult === 1) {
-            const objToJson = {
-                coinSide: "heads",
-              }
-              res.end(JSON.stringify(objToJson));
-        } else {
-            const objToJson = {
-                coinSide: "tails",
-              }
-              res.end(JSON.stringify(objToJson));
+        const objToJson = {
+            status: "success"
         }
-      }
+        res.end(JSON.stringify(objToJson));
+  }
   else if (page == '/css/style.css') {
     fs.readFile('css/style.css', (err, data) => {
       res.writeHead(200, {'Content-Type': 'text/css'});
