@@ -4,22 +4,148 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heads or Tails</title>
+    <meta name="description" content="PassWizard - Your magical password generator" />
+    <meta name="keywords" content="password generator, security, password, wizard, magic" />
+    <meta name="author" content="Bobby Asakawa" />
+    <!-- Preload-->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
+    <!-- Preconnect-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- External CSS -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <title>PassWizard - Your Magical Password Generator</title>
 </head>
 <body>
-    <section>
-        <h1>Flip a coin: Server-side</h1>
-        <button type="submit" name="button" value="heads" id="heads">Pick Heads</button>
-        <button type="submit" name="button" value="tails" id="tails">Pick Tails</button>
-    </section>
-    <section>
-        <h2 class="winningCondition"></h2>
-        <p>The player chose: <span class="playerChoice"></span></p>
-        <p>The coin landed on: <span class="coinFlipResult"></span></p>
-    </section>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="site-header" role="banner">
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <div class="logo">
+                <i class="fas fa-hat-wizard" aria-hidden="true"></i>
+                <span>PassWizard</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <button type="button" id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
+                <li><a href="#" id="aboutBtn" aria-haspopup="dialog">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Modal Structure -->
+    <div class="modal" id="aboutModal" role="dialog" aria-labelledby="modalTitle" aria-modal="true" hidden>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-scroll" aria-hidden="true"></i> About PassWizard</h2>
+                <button class="close-modal" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Welcome to PassWizard, where we combine the art of magic with the science of security to create the perfect passwords for your digital realm.</p>
+                
+                <h3>Our Magical Features:</h3>
+                <ul>
+                    <li><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> Instant password generation</li>
+                    <li><i class="fas fa-shield" aria-hidden="true"></i> Strong, randomized combinations</li>
+                    <li><i class="fas fa-eye-slash" aria-hidden="true"></i> Privacy controls</li>
+                    <li><i class="fas fa-copy" aria-hidden="true"></i> One-click copying</li>
+                </ul>
+
+                <h3>The Magic Behind the Curtain:</h3>
+                <p>Built with modern web technologies, PassWizard ensures your passwords are generated securely and efficiently. Our spells (algorithms) create unique combinations of letters, numbers, and special characters to protect your digital treasures.</p>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" role="main">
+        <section class="hero" aria-label="Introduction">
+            <div class="hero-content">
+                <h1>PassWizard</h1>
+                <p class="tagline">Conjure the perfect password with a wave of your wand</p>
+            </div>
+        </section>
+
+        <section class="password-generator" aria-labelledby="generator-title">
+            <div class="container">
+                <h2 id="generator-title">Cast Your Password Spell</h2>
+                <button type="button" id="randomBtn" aria-label="Generate new password">
+                    <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
+                    Generate Password
+                </button>
+                
+                <div class="password-container" role="region" aria-label="Generated password">
+                    <button type="button" class="action-btn" id="toggleVisibility" title="Toggle password visibility" aria-label="Toggle password visibility">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <p class="passwordResult" aria-live="polite"></p>
+                    <div class="password-actions">
+                        <button type="button" class="action-btn" id="copyBtn" title="Copy to clipboard" aria-label="Copy password to clipboard">
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" aria-labelledby="features-title">
+            <div class="container">
+                <h2 id="features-title">Magical Features</h2>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <i class="fas fa-shield" aria-hidden="true"></i>
+                        <h3>Secure</h3>
+                        <p>Strong, randomized passwords that protect your accounts</p>
+                    </article>
+                    <article class="feature-card">
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
+                        <h3>Fast</h3>
+                        <p>Generate passwords instantly with a single click</p>
+                    </article>
+                    <article class="feature-card">
+                        <i class="fas fa-eye-slash" aria-hidden="true"></i>
+                        <h3>Private</h3>
+                        <p>Toggle visibility to keep your passwords hidden</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-hat-wizard" aria-hidden="true"></i>
+                    <span>PassWizard</span>
+                </div>
+                <p class="copyright">&copy; 2025 Bobby Asakawa. All rights reserved.</p>
+                <nav class="social-links" aria-label="Social media links">
+                    <a href="https://github.com/boobeh123" title="GitHub" aria-label="Visit our GitHub profile">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://bobby-asakawa.netlify.app/" title="Portfolio" aria-label="Visit our portfolio website">
+                        <i class="fab fa-globe" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://x.com/boobeh123" title="Twitter" aria-label="Follow us on Twitter">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
     <script type="text/javascript" src="/js/main.js"></script>
 </body>
 </html>
