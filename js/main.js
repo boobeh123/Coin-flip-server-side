@@ -85,32 +85,12 @@ async function generateRandomPassword() {
         
         const data = await response.json();
         
-        // Define character sets
-        const numbers = '0123456789';
-        const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const specialChars = '!@#$%^&*_+-?';
-        
-        // Generate random length between 8 and 16
-        const length = Math.floor(Math.random() * 9) + 8;
-        
-        // Initialize password with at least one character from each set
-        let password = '';
-        password += numbers[Math.floor(Math.random() * numbers.length)];
-        password += letters[Math.floor(Math.random() * letters.length)];
-        password += specialChars[Math.floor(Math.random() * specialChars.length)];
-        
-        // Fill the rest of the password
-        const allChars = numbers + letters + specialChars;
-        for (let i = password.length; i < length; i++) {
-            password += allChars[Math.floor(Math.random() * allChars.length)];
+        if (data.status === 'success' && data.password) {
+            currentPassword = data.password;
+            displayPassword();
+        } else {
+            throw new Error('Invalid response from server');
         }
-        
-        // Shuffle the password
-        password = password.split('').sort(() => Math.random() - 0.5).join('');
-        
-        // Store the current password and display it
-        currentPassword = password;
-        displayPassword();
         
     } catch (error) {
         console.error('Error:', error);
