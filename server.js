@@ -17,9 +17,33 @@ const server = http.createServer((req, res) => {
     });
   }
   else if (page == '/api') {
+        // Define character sets
+        const numbers = '0123456789';
+        const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const specialChars = '!@#$%^&*_+-?';
+        
+        // Generate random length between 8 and 16
+        const length = Math.floor(Math.random() * 9) + 8;
+        
+        // Initialize password with at least one character from each set
+        let password = '';
+        password += numbers[Math.floor(Math.random() * numbers.length)];
+        password += letters[Math.floor(Math.random() * letters.length)];
+        password += specialChars[Math.floor(Math.random() * specialChars.length)];
+        
+        // Fill the rest of the password
+        const allChars = numbers + letters + specialChars;
+        for (let i = password.length; i < length; i++) {
+            password += allChars[Math.floor(Math.random() * allChars.length)];
+        }
+        
+        // Shuffle the password
+        password = password.split('').sort(() => Math.random() - 0.5).join('');
+
         res.writeHead(200, {'Content-Type': 'application/json'});
         const objToJson = {
-            status: "success"
+            status: "success",
+            password: password
         }
         res.end(JSON.stringify(objToJson));
   }
