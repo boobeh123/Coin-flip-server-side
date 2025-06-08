@@ -138,3 +138,10 @@ function togglePasswordVisibility() {
     displayPassword();
 }
 
+// Update copyright year
+document.addEventListener('DOMContentLoaded', function() {
+    const yearSpan = document.querySelector('footer .copyright span');
+    if (yearSpan) {
+        yearSpan.innerHTML = `&copy; ${new Date().getFullYear()} Bobby Asakawa`;
+    }
+});
