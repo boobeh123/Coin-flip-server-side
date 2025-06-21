@@ -1,16 +1,12 @@
-// Theme switching functionality
+// Dark/Light mode
 const themeToggle = document.getElementById('themeToggle');
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-// Check for saved theme preference or use system preference
 const currentTheme = localStorage.getItem('theme') || 
     (prefersDarkScheme.matches ? 'dark' : 'light');
 
-// Apply the theme
 document.documentElement.setAttribute('data-theme', currentTheme);
 updateThemeIcon(currentTheme);
 
-// Theme toggle click handler
 themeToggle.addEventListener('click', () => {
     const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' 
         ? 'light' 
@@ -21,13 +17,11 @@ themeToggle.addEventListener('click', () => {
     updateThemeIcon(newTheme);
 });
 
-// Update theme icon
 function updateThemeIcon(theme) {
     const icon = themeToggle.querySelector('i');
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 }
 
-// Listen for system theme changes
 prefersDarkScheme.addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
         const newTheme = e.matches ? 'dark' : 'light';
@@ -40,7 +34,7 @@ document.querySelector('#randomBtn').addEventListener('click', generateRandomPas
 document.querySelector('#copyBtn').addEventListener('click', copyToClipboard);
 document.querySelector('#toggleVisibility').addEventListener('click', togglePasswordVisibility);
 
-// Modal functionality
+// Modal
 const modal = document.getElementById('aboutModal');
 const aboutBtn = document.getElementById('aboutBtn');
 const closeModal = document.querySelector('.close-modal');
@@ -48,12 +42,12 @@ const closeModal = document.querySelector('.close-modal');
 aboutBtn.addEventListener('click', (e) => {
     e.preventDefault();
     modal.classList.add('show');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
 });
 
 closeModal.addEventListener('click', () => {
     modal.classList.remove('show');
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
 });
 
 // Close modal when clicking outside
@@ -72,6 +66,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Buttons
 let currentPassword = '';
 let isPasswordVisible = true;
 
@@ -118,7 +113,6 @@ function copyToClipboard() {
         copyBtn.querySelector('i').classList.remove('fa-copy');
         copyBtn.querySelector('i').classList.add('fa-check');
         
-        // Show tooltip notification
         console.log('Showing tooltip notification');
         showTooltipNotification('Copied to clipboard', 'success');
         
@@ -133,7 +127,6 @@ function copyToClipboard() {
     });
 }
 
-// Tooltip notification function
 function showTooltipNotification(message, type = 'success') {
     console.log('showTooltipNotification called with:', message, type);
     
@@ -148,23 +141,19 @@ function showTooltipNotification(message, type = 'success') {
         return;
     }
     
-    // Update message and type
     tooltipMessage.textContent = message;
     tooltip.className = `tooltip-notification ${type}`;
     
     console.log('Tooltip classes set:', tooltip.className);
     
-    // Show tooltip
     tooltip.hidden = false;
     tooltip.classList.add('show');
     
     console.log('Tooltip should now be visible');
     
-    // Hide tooltip after 3 seconds
     setTimeout(() => {
         tooltip.classList.remove('show');
         
-        // Hide element after transition completes
         setTimeout(() => {
             tooltip.hidden = true;
         }, 300);
@@ -187,7 +176,6 @@ function togglePasswordVisibility() {
     displayPassword();
 }
 
-// Update copyright year
 document.addEventListener('DOMContentLoaded', function() {
     const yearSpan = document.querySelector('footer .copyright span');
     if (yearSpan) {
@@ -195,7 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Test function for tooltip - can be called from browser console
 function testTooltip() {
     console.log('Testing tooltip functionality...');
     showTooltipNotification('Test tooltip message', 'success');
