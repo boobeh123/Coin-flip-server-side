@@ -104,13 +104,23 @@ function displayPassword() {
 }
 
 function copyToClipboard() {
-    if (!currentPassword) return;
+    if (!currentPassword) {
+        console.log('No password to copy');
+        return;
+    }
+    
+    console.log('Attempting to copy password:', currentPassword);
     
     navigator.clipboard.writeText(currentPassword).then(() => {
+        console.log('Password copied successfully');
         const copyBtn = document.querySelector('#copyBtn');
         copyBtn.classList.add('copied');
         copyBtn.querySelector('i').classList.remove('fa-copy');
         copyBtn.querySelector('i').classList.add('fa-check');
+        
+        // Show tooltip notification
+        console.log('Showing tooltip notification');
+        showTooltipNotification('Copied to clipboard', 'success');
         
         setTimeout(() => {
             copyBtn.classList.remove('copied');
@@ -119,7 +129,46 @@ function copyToClipboard() {
         }, 2000);
     }).catch(err => {
         console.error('Failed to copy password:', err);
+        showTooltipNotification('Failed to copy password', 'error');
     });
+}
+
+// Tooltip notification function
+function showTooltipNotification(message, type = 'success') {
+    console.log('showTooltipNotification called with:', message, type);
+    
+    const tooltip = document.getElementById('tooltipNotification');
+    const tooltipMessage = document.getElementById('tooltipMessage');
+    
+    console.log('Tooltip element found:', tooltip);
+    console.log('Tooltip message element found:', tooltipMessage);
+    
+    if (!tooltip || !tooltipMessage) {
+        console.error('Tooltip elements not found!');
+        return;
+    }
+    
+    // Update message and type
+    tooltipMessage.textContent = message;
+    tooltip.className = `tooltip-notification ${type}`;
+    
+    console.log('Tooltip classes set:', tooltip.className);
+    
+    // Show tooltip
+    tooltip.hidden = false;
+    tooltip.classList.add('show');
+    
+    console.log('Tooltip should now be visible');
+    
+    // Hide tooltip after 3 seconds
+    setTimeout(() => {
+        tooltip.classList.remove('show');
+        
+        // Hide element after transition completes
+        setTimeout(() => {
+            tooltip.hidden = true;
+        }, 300);
+    }, 3000);
 }
 
 function togglePasswordVisibility() {
@@ -145,3 +194,9 @@ document.addEventListener('DOMContentLoaded', function() {
         yearSpan.innerHTML = `&copy; ${new Date().getFullYear()} Bobby Asakawa`;
     }
 });
+
+// Test function for tooltip - can be called from browser console
+function testTooltip() {
+    console.log('Testing tooltip functionality...');
+    showTooltipNotification('Test tooltip message', 'success');
+}
